@@ -8,5 +8,16 @@
  */
 class Main extends CI_Controller
 {
+    public function index()
+    {
+        $this->start();
+    }
 
+    public function start()
+    {
+        $info["title"] = "Start";
+        $this->load->view("header");
+        $this->load->view("start");
+        $this->load->view("footer");
+    }
 }
