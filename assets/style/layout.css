@@ -1,3 +1,59 @@
+.inputField {
+  display: inline-block;
+  margin-bottom: 6px;
+  border-bottom: black 1pt solid;
+  color: black;
+  background-color: #CCCCCC; }
 
+.input {
+  background-color: #CCCCCC;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  transition: border-bottom 0.2s; }
+  .input .big {
+    width: 100%; }
+    .input .big .narrow {
+      width: 10%; }
+
+.removeButton {
+  color: black; }
+
+body {
+  background-color: #CCCCCC; }
+
+.button {
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  color: white;
+  background: rgba(18, 86, 3, 0.71);
+  padding: 5px 20px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s; }
+
+.button:hover {
+  background: #113903; }
+
+.textButton {
+  text-decoration: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer; }
+
+.shadow {
+  box-shadow: 3px 5px 6px rgba(17, 17, 17, 0.5);
+  transition: box-shadow 0.3s; }
+
+.shadow:hover {
+  box-shadow: 2px 4px 5px rgba(17, 17, 17, 0.4); }
+
+.library {
+  border-spacing: 5px; }
 
 /*# sourceMappingURL=layout.css.map */
