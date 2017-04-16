@@ -73,6 +73,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+
+#TODO username en password van jouw sqldatabase.
+#TODO naam gebruikte database invullen.
+#TODO indien nieuwe database, gebruiker rechten geven op deze database
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',

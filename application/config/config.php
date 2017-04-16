@@ -23,6 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+
+#TODO Volgende regel veranderen door ip-adres van jouw server + pad wijzigen naar jouw map in public_html
 $config['base_url'] = 'http://192.168.40.136/~wietse/WP2/';
 
 /*
