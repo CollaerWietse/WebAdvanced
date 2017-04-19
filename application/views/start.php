@@ -6,6 +6,13 @@
  * Time: 14:11
  */
 
+/**
+ * Geeft een tabel weer met alle films.
+ * de variabele movies komt uit de controller.
+ * Als de score niet is ingevuld, dan wordt er een / geschreven.
+ *
+ * anchor-tag verwijst naar de controller-functie deleteMovie en geeft in de url ook het id mee van de film.
+ */
 ?>
 
 <h2>Library</h2>

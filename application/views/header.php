@@ -5,6 +5,13 @@
  * Date: 15/04/2017
  * Time: 14:09
  */
+
+/**
+ * Geeft een header van een pagina.
+ *
+ * $title: geeft de titel van de pagina uit de controller.
+ * asset_url: is een zelfgemaakte helper die wijst naar de asset-map.
+ */
 ?>
 
 <!DOCTYPE html>

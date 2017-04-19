@@ -5,11 +5,21 @@
  * Date: 16/04/2017
  * Time: 10:08
  */
+
+/**
+ * set_value() vult de velden in met de waardes die ingegeven waren voor de validatie van het formulier.
+ * Wanneer er een validatieerror is, zal de gebruiker de velden niet opnieuw moeten invullen.
+ *
+ * $errors: bevat de validatie errors als die er zijn.
+ */
 ?>
 
 <h2>Add a movie</h2>
 
-<?php echo form_open(base_url() . "main/addMovie");?>
+
+<?php
+//Geeft een form-tag weer op de pagina.
+echo form_open(base_url() . "main/addMovie");?>
 <table class="formTable">
     <tr>
         <td class="narrow">Title</td>

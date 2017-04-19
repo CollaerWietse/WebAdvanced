@@ -11,11 +11,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Main extends CI_Controller
 {
+    /*
+     * Index functie wordt standaard aangeroepen bij het openen van de website. Deze functie verwijst door naar start
+     */
     public function index()
     {
         $this->start();
     }
 
+    /*
+     * $info["title"]: zet de titel van de pagina.
+     * $data["movies"]: Haalt de data op uit movie_model.
+     * views worden weergegeven met de nodige data en info.
+     */
     public function start()
     {
         $this->load->model("movie_model");
@@ -26,6 +34,13 @@ class Main extends CI_Controller
         $this->load->view("footer");
     }
 
+    /*
+     * Opent een pagina om een film toe te voegen.
+     * Wanneer de pagina geladen wordt, zal de validatie al eens uitgevoerd worden.
+     * Wanneer er op submit geklikt wordt, dan zal de validatie nog eens uitgevoerd worden.
+     * Indien de validatie lukt, zal er terug naar de startpagina gegaan worden en zal de film in de startpagina te zien zijn.
+     * Anders worden de errors weergegeven.
+     */
     public function addMovie()
     {
         $this->load->model("movie_model");
@@ -55,6 +70,10 @@ class Main extends CI_Controller
         }
     }
 
+    /*
+     * Deze functie roept movie_model aan om een film te verwijderen.
+     * Daarna wordt de startpagina terug doorverwezen en zal de film niet meer in de lijst te zien zijn.
+     */
     public function deleteMovie($id)
     {
         $this->load->model('movie_model');
