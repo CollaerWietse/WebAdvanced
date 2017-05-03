@@ -4,7 +4,7 @@ use \model\PDOEvenementRepository;
 use \view\EvenementJsonView;
 use \controller\EvenementController;
 
-$user = 'user';
+$user = 'root';
 $password = 'user';
 $database = 'MonkeyBusiness';
 $hostname = '127.0.0.1';

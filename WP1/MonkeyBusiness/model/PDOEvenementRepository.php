@@ -27,7 +27,7 @@ class PDOEvenementRepository implements EvenementRepository
                 return null;
             }
         } catch (\Exception $exception) {
-            return null;
+            return $exception->getMessage();
         }
     }
 
@@ -50,7 +50,7 @@ class PDOEvenementRepository implements EvenementRepository
                 return null;
             }
         } catch (\Exception $exception) {
-            return null;
+            return $exception->getMessage();
         }
     }
 
@@ -75,7 +75,7 @@ class PDOEvenementRepository implements EvenementRepository
                 return null;
             }
         } catch (\Exception $exception) {
-            return null;
+            return $exception->getMessage();
         }
     }
 
@@ -101,7 +101,7 @@ class PDOEvenementRepository implements EvenementRepository
                 return null;
             }
         } catch (\Exception $exception) {
-            return null;
+            return $exception->getMessage();
         }
     }
 
@@ -127,7 +127,7 @@ class PDOEvenementRepository implements EvenementRepository
                 return null;
             }
         } catch (\Exception $exception) {
-            return null;
+            return $exception->getMessage();
         }
     }
 
@@ -135,12 +135,19 @@ class PDOEvenementRepository implements EvenementRepository
     public function addEvent($event)
     {
         try {
-        $statement = $this->connection->prepare('INSERT INTO Evenementen VALUE ?');
-        $statement->bindParam(1, $event);
-        $statement->execute();
+            $statement = $this->connection->prepare('INSERT INTO Evenementen (id, naam, begindatum, einddatum, klantnummer, bezetting, kost, materialen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            $statement->bindParam(1, $event->id, \PDO::PARAM_INT);
+            $statement->bindParam(2, $event->naam, \PDO::PARAM_STR);
+            $statement->bindParam(3, $event->begindatum, \PDO::PARAM_STR);
+            $statement->bindParam(4, $event->einddatum, \PDO::PARAM_STR);
+            $statement->bindParam(5, $event->klantnummer, \PDO::PARAM_INT);
+            $statement->bindParam(6, $event->bezetting, \PDO::PARAM_STR);
+            $statement->bindParam(7, $event->kost);
+            $statement->bindParam(8, $event->materialen, \PDO::PARAM_STR);
+            $statement->execute();
 
         } catch (\Exception $exception) {
-        return null;
+            return $exception->getMessage();
         }
 
     }
@@ -148,23 +155,23 @@ class PDOEvenementRepository implements EvenementRepository
     //update an event by giving the id of the event that has to be updated and the event as parameter
     public function updateEvent($id, $event)
     {
-/*
+
         try {
             $statement = $this->connection->prepare('UPDATE Evenementen SET naam = ?, begindatum = ?, einddatum = ?, klantnummer = ?, bezetting = ?, kost = ?, materialen = ? WHERE id = ?');
-            $statement->bindParam(1, $id, \PDO::PARAM_INT);
-            $statement->bindParam(2, $id);
-            $statement->bindParam(3, $id);
-            $statement->bindParam(4, $id);
-            $statement->bindParam(5, $id);
-            $statement->bindParam(6, $id);
-            $statement->bindParam(7, $id);
-            $statement->bindParam(8, $id);
+            $statement->bindParam(1, $event->naam, \PDO::PARAM_STR);
+            $statement->bindParam(2, $event->begindatum, \PDO::PARAM_STR);
+            $statement->bindParam(3, $event->einddatum, \PDO::PARAM_STR);
+            $statement->bindParam(4, $event->klantnummer, \PDO::PARAM_INT);
+            $statement->bindParam(5, $event->bezetting, \PDO::PARAM_STR);
+            $statement->bindParam(6, $event->kost);
+            $statement->bindParam(7, $event->materialen, \PDO::PARAM_STR);
+            $statement->bindParam(8, $id, \PDO::PARAM_INT);
             $statement->execute();
 
         } catch (\Exception $exception) {
-            return null;
+            return $exception->getMessage();
         }
-*/
+
     }
 
     //delete an event by giving the id of the event that has to be deleted as parameter
