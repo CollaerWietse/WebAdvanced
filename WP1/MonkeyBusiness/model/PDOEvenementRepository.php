@@ -1,0 +1,182 @@
+<?php
+
+namespace model;
+
+class PDOEvenementRepository implements EvenementRepository
+{
+    private $connection = null;
+
+    public function __construct(\PDO $connection)
+    {
+        $this->connection = $connection;
+    }
+
+    //find an event by giving the event id as parameter
+    public function findEventById($id )
+    {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM Evenementen WHERE id = ?");
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            if (count($results) > 0) {
+                return new Evenement($results[0]['id'], $results[0]['naam'], $results[0]['begindatum'], $results[0]['einddatum'], $results[0]['klantnummer'],
+                    $results[0]['bezetting'], $results[0]['kost'], $results[0]['materialen']);
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    //find all events (no parameters)
+    public function findEvents()
+    {
+        try {
+            $statement = $this->connection->prepare('SELECT * FROM Evenementen');
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $arrayResults = array();
+
+            if (count($results) > 0) {
+                foreach ($results as $event) {
+                    array_push($arrayResults, new Evenement($event['id'], $event['naam'], $event['begindatum'], $event['einddatum'], $event['klantnummer'],
+                        $event['bezetting'], $event['kost'], $event['materialen']));
+                }
+                return $arrayResults;
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    //find an event by giving the customer id as parameter
+    public function findEventByCustomer($customerId)
+    {
+        try {
+            $statement = $this->connection->prepare('SELECT * FROM Evenementen WHERE klantnummer = ?');
+            $statement->bindParam(1, $customerId, \PDO::PARAM_INT);
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            $arrayResults = array();
+
+            if (count($results) > 0) {
+                foreach ($results as $event) {
+                    array_push($arrayResults, new Evenement($event['id'], $event['naam'], $event['begindatum'], $event['einddatum'], $event['klantnummer'],
+                        $event['bezetting'], $event['kost'], $event['materialen']));
+                }
+                return $arrayResults;
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    //find an event by giving the start date and end date of the event as parameters
+    public function findEventByDate($startDate, $endDate)
+    {
+        try {
+            $statement = $this->connection->prepare('SELECT * FROM Evenementen WHERE begindatum = ? AND einddatum = ?');
+            $statement->bindParam(1, $startDate, \PDO::PARAM_STR);
+            $statement->bindParam(2, $endDate, \PDO::PARAM_STR);
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            $arrayResults = array();
+
+            if (count($results) > 0) {
+                foreach ($results as $event) {
+                    array_push($arrayResults, new Evenement($event['id'], $event['naam'], $event['begindatum'], $event['einddatum'], $event['klantnummer'],
+                        $event['bezetting'], $event['kost'], $event['materialen']));
+                }
+                return $arrayResults;
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    public function findEventByCustomerAndDate($customerId, $startDate, $endDate)
+    {
+        try {
+            $statement = $this->connection->prepare('SELECT * FROM Evenementen WHERE begindatum = ? AND einddatum = ? AND id = ?');
+            $statement->bindParam(1, $startDate, \PDO::PARAM_STR);
+            $statement->bindParam(2, $endDate, \PDO::PARAM_STR);
+            $statement->bindParam(3, $customerId, \PDO::PARAM_INT);
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            $arrayResults = array();
+
+            if (count($results) > 0) {
+                foreach ($results as $event) {
+                    array_push($arrayResults, new Evenement($event['id'], $event['naam'], $event['begindatum'], $event['einddatum'], $event['klantnummer'],
+                        $event['bezetting'], $event['kost'], $event['materialen']));
+                }
+                return $arrayResults;
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    //add an event by giving the new event as parameter
+    public function addEvent($event)
+    {
+        try {
+        $statement = $this->connection->prepare('INSERT INTO Evenementen VALUE ?');
+        $statement->bindParam(1, $event);
+        $statement->execute();
+
+        } catch (\Exception $exception) {
+        return null;
+        }
+
+    }
+
+    //update an event by giving the id of the event that has to be updated and the event as parameter
+    public function updateEvent($id, $event)
+    {
+/*
+        try {
+            $statement = $this->connection->prepare('UPDATE Evenementen SET naam = ?, begindatum = ?, einddatum = ?, klantnummer = ?, bezetting = ?, kost = ?, materialen = ? WHERE id = ?');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->bindParam(2, $id);
+            $statement->bindParam(3, $id);
+            $statement->bindParam(4, $id);
+            $statement->bindParam(5, $id);
+            $statement->bindParam(6, $id);
+            $statement->bindParam(7, $id);
+            $statement->bindParam(8, $id);
+            $statement->execute();
+
+        } catch (\Exception $exception) {
+            return null;
+        }
+*/
+    }
+
+    //delete an event by giving the id of the event that has to be deleted as parameter
+    public function deleteEvent($id)
+    {
+        try {
+            $statement = $this->connection->prepare('DELETE FROM Evenementen WHERE id = ?');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->execute();
+            echo 'done!';
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+}
