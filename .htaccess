@@ -1,21 +1,34 @@
-          <IfModule mod_rewrite.c>
-            RewriteEngine On
+         #<IfModule mod_rewrite.c>
+         #   RewriteEngine On
             # !IMPORTANT! Set your RewriteBase here and don't forget trailing and leading
             #  slashes.
             # If your page resides at
             #  http://www.example.com/mypage/test1
             # then use
             # RewriteBase /mypage/test1/
-            RewriteBase /~wietse/WP2/
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteRule ^(.*)$ index.php?/$1 [L]
-          </IfModule>
+         #  RewriteBase /~wietse/WP2/
+         #   RewriteCond %{REQUEST_FILENAME} !-f
+         #   RewriteCond %{REQUEST_FILENAME} !-d
+         #   RewriteRule ^(.*)$ index.php?/$1 [L]
+         # </IfModule>
 
-          <IfModule !mod_rewrite.c>
+
+
+         # <IfModule !mod_rewrite.c>
             # If we don't have mod_rewrite installed, all 404's
             # can be sent to index.php, and everything works as normal.
             # Submitted by: ElliotHaughin
 
-            ErrorDocument 404 /index.php
+         #   ErrorDocument 404 /index.php
+         # </IfModule>
+
+          <IfModule mod_rewrite.c>
+          RewriteEngine On
+          RewriteBase /~user/ProjectWebAdvanced/WP1/MonkeyBusiness/
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^(.*)$ api.php?/$1 [L]
+          </IfModule>
+          <IfModule !mod_rewrite.c>
+          ErrorDocument 404 /api.php
           </IfModule>

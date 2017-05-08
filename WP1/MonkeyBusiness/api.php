@@ -21,7 +21,7 @@ try {
 
     $router = new AltoRouter();
 
-    $router->setBasePath('/~user/MonkeyBusiness');
+    $router->setBasePath('/~user/ProjectWebAdvanced/WP1/MonkeyBusiness');
 
 
     $router->map('GET','/evenement/[i:id]',
@@ -45,7 +45,6 @@ try {
         }
     );
 
-    //$router->map('GET','/evenement/?from=[:from]&until=[:until]',
     $router->map('GET','/evenement/from/[:from]/until/[:until]',
         function($from, $until) use (&$evenementController) {
             header("Content-Type: application/json");
@@ -53,7 +52,6 @@ try {
         }
     );
 
-    //$router->map('GET','/evenement/klant/[i:id]/?from=[:from]&until=[:until]',
     $router->map('GET','/evenement/klant/[i:id]/from/[:from]/until/[:until]',
         function($id, $from, $until) use (&$evenementController) {
             header("Content-Type: application/json");

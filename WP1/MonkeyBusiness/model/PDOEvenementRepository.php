@@ -135,17 +135,16 @@ class PDOEvenementRepository implements EvenementRepository
     public function addEvent($event)
     {
         try {
-            $statement = $this->connection->prepare('INSERT INTO Evenementen (id, naam, begindatum, einddatum, klantnummer, bezetting, kost, materialen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-            $statement->bindParam(1, $event->id, \PDO::PARAM_INT);
-            $statement->bindParam(2, $event->naam, \PDO::PARAM_STR);
-            $statement->bindParam(3, $event->begindatum, \PDO::PARAM_STR);
-            $statement->bindParam(4, $event->einddatum, \PDO::PARAM_STR);
-            $statement->bindParam(5, $event->klantnummer, \PDO::PARAM_INT);
-            $statement->bindParam(6, $event->bezetting, \PDO::PARAM_STR);
-            $statement->bindParam(7, $event->kost);
-            $statement->bindParam(8, $event->materialen, \PDO::PARAM_STR);
+            $statement = $this->connection->prepare('INSERT INTO Evenementen (naam, begindatum, einddatum, klantnummer, bezetting, kost, materialen) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $statement->bindParam(1, $event->naam, \PDO::PARAM_STR);
+            $statement->bindParam(2, $event->begindatum, \PDO::PARAM_STR);
+            $statement->bindParam(3, $event->einddatum, \PDO::PARAM_STR);
+            $statement->bindParam(4, $event->klantnummer, \PDO::PARAM_INT);
+            $statement->bindParam(5, $event->bezetting, \PDO::PARAM_STR);
+            $statement->bindParam(6, $event->kost);
+            $statement->bindParam(7, $event->materialen, \PDO::PARAM_STR);
             $statement->execute();
-
+            echo 'done!';
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
@@ -167,7 +166,7 @@ class PDOEvenementRepository implements EvenementRepository
             $statement->bindParam(7, $event->materialen, \PDO::PARAM_STR);
             $statement->bindParam(8, $id, \PDO::PARAM_INT);
             $statement->execute();
-
+            echo 'done!';
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
