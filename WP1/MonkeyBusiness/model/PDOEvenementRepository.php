@@ -20,6 +20,7 @@ class PDOEvenementRepository implements EvenementRepository
             $statement->execute();
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
+            //puts returned data in array
             if (count($results) > 0) {
                 return new Evenement($results[0]['id'], $results[0]['naam'], $results[0]['begindatum'], $results[0]['einddatum'], $results[0]['klantnummer'],
                     $results[0]['bezetting'], $results[0]['kost'], $results[0]['materialen']);
