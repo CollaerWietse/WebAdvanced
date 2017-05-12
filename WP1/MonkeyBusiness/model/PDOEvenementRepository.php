@@ -135,6 +135,7 @@ class PDOEvenementRepository implements EvenementRepository
     //add an event by giving the new event as parameter
     public function addEvent($event)
     {
+        var_dump($event);
         try {
             $statement = $this->connection->prepare('INSERT INTO Evenementen (naam, begindatum, einddatum, klantnummer, bezetting, kost, materialen) VALUES (?, ?, ?, ?, ?, ?, ?)');
             $statement->bindParam(1, $event->naam, \PDO::PARAM_STR);
@@ -149,7 +150,6 @@ class PDOEvenementRepository implements EvenementRepository
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
-
     }
 
     //update an event by giving the id of the event that has to be updated and the event as parameter

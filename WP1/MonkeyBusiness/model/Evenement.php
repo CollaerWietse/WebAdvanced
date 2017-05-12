@@ -26,16 +26,16 @@ class Evenement implements \JsonSerializable
      * @param $materialen
      */
 
-    public function __construct($id, $naam, $beginDatum, $eindDatum, $klantnummer, $bezetting, $kost, $materialen)
+    public function __construct($naam, $beginDatum, $eindDatum, $klantnummer, $bezetting, $kost, $materialen)
     {
-        $this->id = $id;
-        $this->naam = $naam;
-        $this->beginDatum = $beginDatum;
-        $this->eindDatum = $eindDatum;
-        $this->klantnummer = $klantnummer;
-        $this->bezetting = $bezetting;
-        $this->kost = $kost;
-        $this->materialen = $materialen;
+        //$this->id = $id;
+        $this->setNaam($naam);
+        $this->setBeginDatum($beginDatum);
+        $this->setEindDatum($eindDatum);
+        $this->setKlantnummer($klantnummer);
+        $this->setBezetting($bezetting);
+        $this->setKost($kost);
+        $this->setMaterialen($materialen);
     }
 
     public function jsonSerialize()

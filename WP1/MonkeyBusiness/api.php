@@ -21,8 +21,8 @@ try {
 
     $router = new AltoRouter();
 
-    $router->setBasePath('/~user/ProjectWebAdvanced/WP1/MonkeyBusiness');
-
+    $router->setBasePath('/ProjectWebAdvanced/WP1/MonkeyBusiness');
+    //$router->setBasePath('/~user/ProjectWebAdvanced/WP1/MonkeyBusiness');
 
     $router->map('GET','/evenement/[i:id]',
         function($id) use (&$evenementController) {
@@ -60,9 +60,17 @@ try {
     );
 
     $router->map('POST','/evenement/add',
+
         function($event) use (&$evenementController) {
+            //var_dump($event);
+            //$event = new \model\Evenement("test", "2017-05-12", "2017-05-12", "1", "test", "5000", "test");
+            $_POST[$event];
+
+            print_r($_POST);//print out the whole post
+            print_r($_POST[$event]); //print out only the data array
+
             header("Content-Type: application/json");
-            $evenementController->handleAddEvent($event);
+            //$evenementController->handleAddEvent($event);
         }
     );
 
