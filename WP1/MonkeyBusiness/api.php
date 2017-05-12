@@ -86,5 +86,5 @@ try {
         call_user_func_array( $match['target'], $match['params'] );
     }
 } catch (Exception $e) {
-    echo "Error in api.php";
+    echo $e->getMessage();
 }
