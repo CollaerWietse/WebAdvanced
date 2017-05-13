@@ -79,8 +79,6 @@ try {
 
             $data = json_decode($evenement);
 
-
-
             $evenementController->handleAddEvent($data);
         }
     );
