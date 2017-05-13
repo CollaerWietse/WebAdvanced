@@ -135,16 +135,17 @@ class PDOEvenementRepository implements EvenementRepository
     //add an event by giving the new event as parameter
     public function addEvent($event)
     {
-        var_dump($event);
+        $data = json_decode($event);
+
         try {
             $statement = $this->connection->prepare('INSERT INTO Evenementen (naam, begindatum, einddatum, klantnummer, bezetting, kost, materialen) VALUES (?, ?, ?, ?, ?, ?, ?)');
-            $statement->bindParam(1, $event->naam, \PDO::PARAM_STR);
-            $statement->bindParam(2, $event->begindatum, \PDO::PARAM_STR);
-            $statement->bindParam(3, $event->einddatum, \PDO::PARAM_STR);
-            $statement->bindParam(4, $event->klantnummer, \PDO::PARAM_INT);
-            $statement->bindParam(5, $event->bezetting, \PDO::PARAM_STR);
-            $statement->bindParam(6, $event->kost);
-            $statement->bindParam(7, $event->materialen, \PDO::PARAM_STR);
+            $statement->bindParam(1, $data->naam, \PDO::PARAM_STR);
+            $statement->bindParam(2, $data->beginDatum, \PDO::PARAM_STR);
+            $statement->bindParam(3, $data->eindDatum, \PDO::PARAM_STR);
+            $statement->bindParam(4, $data->klantNummer, \PDO::PARAM_INT);
+            $statement->bindParam(5, $data->bezetting, \PDO::PARAM_STR);
+            $statement->bindParam(6, $data->kost, \PDO::PARAM_STR);
+            $statement->bindParam(7, $data->materialen, \PDO::PARAM_STR);
             $statement->execute();
             echo 'done!';
         } catch (\Exception $exception) {
@@ -156,15 +157,17 @@ class PDOEvenementRepository implements EvenementRepository
     public function updateEvent($id, $event)
     {
 
+        $data = json_decode($event);
+
         try {
             $statement = $this->connection->prepare('UPDATE Evenementen SET naam = ?, begindatum = ?, einddatum = ?, klantnummer = ?, bezetting = ?, kost = ?, materialen = ? WHERE id = ?');
-            $statement->bindParam(1, $event->naam, \PDO::PARAM_STR);
-            $statement->bindParam(2, $event->begindatum, \PDO::PARAM_STR);
-            $statement->bindParam(3, $event->einddatum, \PDO::PARAM_STR);
-            $statement->bindParam(4, $event->klantnummer, \PDO::PARAM_INT);
-            $statement->bindParam(5, $event->bezetting, \PDO::PARAM_STR);
-            $statement->bindParam(6, $event->kost);
-            $statement->bindParam(7, $event->materialen, \PDO::PARAM_STR);
+            $statement->bindParam(1, $data->naam, \PDO::PARAM_STR);
+            $statement->bindParam(2, $data->beginDatum, \PDO::PARAM_STR);
+            $statement->bindParam(3, $data->eindDatum, \PDO::PARAM_STR);
+            $statement->bindParam(4, $data->klantNummer, \PDO::PARAM_INT);
+            $statement->bindParam(5, $data->bezetting, \PDO::PARAM_STR);
+            $statement->bindParam(6, $data->kost, \PDO::PARAM_STR);
+            $statement->bindParam(7, $data->materialen, \PDO::PARAM_STR);
             $statement->bindParam(8, $id, \PDO::PARAM_INT);
             $statement->execute();
             echo 'done!';

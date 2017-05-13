@@ -4,7 +4,7 @@ namespace controller;
 
 use model\EvenementRepository;
 use view\EvenementJsonView;
-use view\View;
+use \model\Evenement;
 
 class EvenementController
 {
@@ -48,15 +48,15 @@ class EvenementController
     }
 
     public function handleAddEvent($event) {
-
-        //var_dump($event);
-        $evenement = $this->evenementRepository->addEvent($event);
-        echo json_encode($evenement, JSON_PRETTY_PRINT);
+        $data = json_encode($event, JSON_PRETTY_PRINT);
+        $evenement = $this->evenementRepository->addEvent($data);
+        //echo json_encode($evenement, JSON_PRETTY_PRINT);
     }
 
     public function handleUpdateEvent($id, $event) {
+        $data = json_encode($event, JSON_PRETTY_PRINT);
         $evenement = $this->evenementRepository->updateEvent($id, $event);
-        echo json_encode($evenement, JSON_PRETTY_PRINT);
+        //echo json_encode($evenement, JSON_PRETTY_PRINT);
     }
 
     public function handleDeleteEvent($id) {

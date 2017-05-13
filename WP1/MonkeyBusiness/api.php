@@ -3,6 +3,7 @@ require_once "vendor/autoload.php";
 use \model\PDOEvenementRepository;
 use \view\EvenementJsonView;
 use \controller\EvenementController;
+use \model\Evenement;
 
 $user = 'root';
 $password = 'user';
@@ -62,22 +63,47 @@ try {
     $router->map('POST','/evenement/add',
 
         function($event) use (&$evenementController) {
-            //var_dump($event);
-            //$event = new \model\Evenement("test", "2017-05-12", "2017-05-12", "1", "test", "5000", "test");
-            $_POST[$event];
-
-            print_r($_POST);//print out the whole post
-            print_r($_POST[$event]); //print out only the data array
-
             header("Content-Type: application/json");
-            //$evenementController->handleAddEvent($event);
+
+            $evenement = '
+            {
+                "id": "1",
+                "naam": "Welcome home robbe",
+                "beginDatum": "2017-05-17",
+                "eindDatum": "2017-05-17",
+                "klantNummer": "1",
+                "bezetting": "Persoon z",
+                "kost": "10000",
+                "materialen": "Bier" 
+            }';
+
+            $data = json_decode($evenement);
+
+
+
+            $evenementController->handleAddEvent($data);
         }
     );
 
     $router->map('PUT','/evenement/update/[i:id]',
         function($id, $event) use (&$evenementController) {
             header("Content-Type: application/json");
-            $evenementController->handleUpdateEvent($id, $event);
+
+            $evenement = '
+            {
+                "id": "1",
+                "naam": "Welcome home robbe",
+                "beginDatum": "2017-05-17",
+                "eindDatum": "2017-05-17",
+                "klantNummer": "1",
+                "bezetting": "Persoon z",
+                "kost": "10000",
+                "materialen": "Bier" 
+            }';
+
+            $data = json_decode($evenement);
+
+            $evenementController->handleUpdateEvent($id, $evenement);
         }
     );
 
