@@ -48,8 +48,8 @@ class EvenementController
     }
 
     public function handleAddEvent($event) {
-        $data = json_encode($event, JSON_PRETTY_PRINT);
-        $evenement = $this->evenementRepository->addEvent($data);
+        /*$data = json_encode($event, JSON_PRETTY_PRINT);*/
+        $evenement = $this->evenementRepository->addEvent($event);
         //echo json_encode($evenement, JSON_PRETTY_PRINT);
     }
 
