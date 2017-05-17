@@ -2,13 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Start</title>
-    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Events</title>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <script>
+<header>
+    <h3>Evenementen</h3>
+</header>
+<div class="content">
+    <div class="module">
+        <h4>Toevoegen</h4>
+        <form id="addForm">
+            <label>Titel evenement </label>
+            <input type="text" placeholder="titel" id="title"><br>
+            <label>Begindatum: </label>
+            <input type="text" placeholder="startdatum" id="startDate"><br>
+            <label>Einddatum: </label>
+            <input type="text" placeholder="eidndatum" id="endDate"><br>
+            <label>Klantnummer: </label>
+            <input type="number" placeholder="klantnummer" id="client"><br>
+            <label>Bezetting: </label>
+            <input type="text" placeholder="bezetting" id="cast"><br>
+            <label>Kost: </label>
+            <input type="number" placeholder="kost" id="cost"><br>
+            <label>Materialen: </label>
+            <input type="text" placeholder="materiaal" id="materials"><br>
 
-    </script>
+            <input type="submit" value="Toevoegen">
+        </form>
+    </div>
+    <div class="module" id="events">
+        <h4>Evenementen</h4>
+        <div class="event">
+            <h5>Dit is een event</h5>
+            <p>Begindatum: </p>
+            <p>Einddatum: </p>
+            <p>Klantnummer: </p>
+            <p>Bezetting: </p>
+            <p>Kost: </p>
+            <p>Materialen: </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    var baseUrl = "http://192.168.25.128/ProjectWebAdvanced/WP1/";
+    window.onload = function () {
+        var insertElement = document.getElementById("events");
+        fetch(baseUrl + "MonkeyBusiness/evenement", {method: 'GET'}).then(function (response) {
+            return response.json();
+        }).then(function (eventsArray) {
+            for (var element in eventsArray) {
+                insertElement.innerHTML = insertElement.innerHTML + "<div class='event'><h5>" + eventsArray[element].naam + "</h5><p>Begindatum: " + eventsArray[element].beginDatum +
+                    "</p><p>Einddatum: " + eventsArray[element].eindDatum +
+                    "</p><p>Klantnummer: " + eventsArray[element].klantnummer +
+                    "</p><p>Bezetting: " + eventsArray[element].bezetting +
+                    "</p><p>Kost: " + eventsArray[element].kost + "" +
+                    "</p><p>Materialen: " + eventsArray[element].materialen + "</p></div>"
+            }
+        });
+    };
+
+    document.getElementById("addForm").onsubmit = function (action) {
+        action.preventDefault();
+        var event = {};
+        event.title = document.getElementById("title").value;
+        event.startDate = document.getElementById("startDate").value;
+        event.endDate = document.getElementById("endDate").value;
+        event.client = document.getElementById("client").value;
+        event.cast = document.getElementById("cast").value;
+        event.cost = document.getElementById("cost").value;
+        event.materials = document.getElementById("materials").value;
+
+        fetch(baseUrl + "Monkeybusiness/evenement/add", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(event)
+        }).then(function (response) {
+            console.log(response.json());
+        }).catch(function (error) {
+           console.log(JSON.stringify(error));
+        });
+    }
+</script>
+
 </body>
 </html>

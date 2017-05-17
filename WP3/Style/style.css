@@ -1,4 +1,82 @@
-html, body {
-  background: #CCC; }
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
-/*# sourceMappingURL=style.css.map */
+body{
+    font-family: 'Roboto', sans-serif;
+    margin:0;
+    padding: 0;
+    background: #CCCCCC;
+    font-size: 12px;
+}
+
+h3{
+    font-weight: 300;
+    color: white;
+    margin: 0;
+}
+
+h4{
+    font-weight: 300;
+    font-size: 22px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+h5{
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0;
+}
+
+header{
+    top:0;
+    left:0;
+    position: fixed;
+    width:100%;
+    padding: 10px;
+    background: #102e4b;
+    box-shadow: 0px 10px 25px 5px rgba(0,0,0,0.42);
+}
+
+.content{
+    padding-top: 80px;
+}
+
+.module{
+    background: white;
+    width: 60%;
+    margin-right:auto;
+    margin-left:auto;
+    padding:25px;
+    border-radius: 2pt;
+    margin-bottom: 30px;
+    transition: width ease-in-out 0.3s;
+}
+
+.event{
+    padding: 10px;
+    background: #eaeaea;
+    border-radius: 2pt;
+}
+
+label{
+    display: block;
+}
+
+input{
+    margin-bottom: 10px;
+}
+
+input[type=submit]{
+    padding: 5px 10px;
+    background: #102e4b;
+    color: white;
+    border: none;
+    border-radius: 2pt;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 850px) {
+    .module{
+        width: 90%;
+    }
+}
+
