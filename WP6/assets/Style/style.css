@@ -1,0 +1,13 @@
+.topMargin{
+    margin-top: 10%;
+}
+.image{
+    width:125px;
+}
+.fixSize{
+    height: 60px;
+}
+.btnSize{
+    height: 60px;
+    width: 120px;
+}
