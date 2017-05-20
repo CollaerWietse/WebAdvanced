@@ -8,6 +8,10 @@
  */
 class Main extends CI_Controller
 {
+    /*
+     * Eerst controle of er https is gebruikt, indien niet doorverwijzen naar https
+     * Daarna naar de loginpagina.
+     */
     public function index()
     {
         if(! isset($_SERVER["HTTPS"])){
@@ -16,6 +20,11 @@ class Main extends CI_Controller
         $this->login();
     }
 
+    /*
+     * Loginpagina met controle op xss.
+     * Als de gegevens juist zijn, dan redirect naar de homepagina van het systeem.
+     * Anders foutmelding weergeven.
+     */
     public function login()
     {
         $this->load->library('form_validation');
@@ -42,17 +51,24 @@ class Main extends CI_Controller
             }
             else{
                 $error['validation'] = "Gebruikersnaam of wachtwoord niet correct";
+                $this->load->view('login', $error);
             }
 
         }
     }
 
+    /*
+     * bij het uitloggen wordt de huidige sessie verwijderd.
+     */
     public function logout()
     {
         $this->session->sess_destroy();
         redirect(base_url());
     }
 
+    /*
+     * controller-functie voor de homepagina. alle evenementen en klanten worden geladen.
+     */
     public function home()
     {
         if(!isset($_SESSION['id'])){
@@ -69,6 +85,9 @@ class Main extends CI_Controller
         }
     }
 
+    /*
+     * controller-functie om een klant toe te voegen aan het systeem.
+     */
     public function addCustomer()
     {
         if(!isset($_SESSION['id'])){
@@ -102,6 +121,9 @@ class Main extends CI_Controller
         }
     }
 
+    /*
+     * controller-functie om een klant te verwijderen via base_url/Main/removeCustomer/1 waarbij 1 de id van de klant is.
+     */
     public function removeCustomer($id)
     {
         if(!isset($_SESSION['id'])){
@@ -114,6 +136,9 @@ class Main extends CI_Controller
         }
     }
 
+    /*
+     * Controller-functie om een evenement toe te voegen.
+     */
     public function addEvent()
     {
         if(!isset($_SESSION['id'])){

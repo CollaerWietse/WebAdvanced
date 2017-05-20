@@ -12,13 +12,21 @@ class Event_model extends CI_Model
     {
         $this->load->database();
     }
-
+    /*
+     * geeft alle evenementen uit de databank terug.
+     */
     public function getAllEvents()
     {
         $query = $this->db->get('events');
         return $query->result();
     }
 
+    /*
+     * voegt een evenement aan de databank toe
+     * $title: titel van het evenement.
+     * $customer_id: de id van de klant.
+     * $date: de datum waarop het evenement plaats heeft.
+     */
     public function addEvent($title, $customer_id, $date)
     {
         $dataToInsert = array(
