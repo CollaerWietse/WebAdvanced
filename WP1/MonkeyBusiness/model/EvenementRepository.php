@@ -11,6 +11,6 @@ interface EvenementRepository
      public function findEventByCustomerAndDate($customerId, $startDate, $endDate);
 
      public function addEvent($event);
-     public function updateEvent($id, $event);
+     public function updateEvent($event);
      public function deleteEvent($id);
 }

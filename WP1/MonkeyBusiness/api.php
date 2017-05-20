@@ -60,48 +60,21 @@ try {
         }
     );
 
-    $router->map('POST','/evenement/add',
-
-        function($event) use (&$evenementController) {
+    //vb: http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/add/party robbe/2017-05-20/2017-05-20/1/niets/5000/niets
+    $router->map('POST','/evenement/add/[:naam]/[:beginDatum]/[:eindDatum]/[:klantNummer]/[:bezetting]/[:kost]/[:materialen]',
+        function($naam, $beginDatum, $eindDatum, $klantNummer, $bezetting, $kost, $materialen) use (&$evenementController) {
             header("Content-Type: application/json");
-
-            $evenement = '
-            {
-                "id": "1",
-                "naam": "Welcome home robbe",
-                "beginDatum": "2017-05-17",
-                "eindDatum": "2017-05-17",
-                "klantNummer": "1",
-                "bezetting": "Persoon z",
-                "kost": "10000",
-                "materialen": "Bier" 
-            }';
-
-            $data = json_decode($evenement);
-
-            $evenementController->handleAddEvent($data);
+            $evenement = new Evenement(null, $naam, $beginDatum, $eindDatum, $klantNummer, $bezetting, $kost, $materialen);
+            $evenementController->handleAddEvent($evenement);
         }
     );
 
-    $router->map('PUT','/evenement/update/[i:id]',
-        function($id, $event) use (&$evenementController) {
+    //vb: http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/update/18/party joachim/2017-05-20/2017-05-20/1/niets/5000/niets
+    $router->map('PUT','/evenement/update/[i:id]/[:naam]/[:beginDatum]/[:eindDatum]/[:klantNummer]/[:bezetting]/[:kost]/[:materialen]',
+        function($id, $naam, $beginDatum, $eindDatum, $klantNummer, $bezetting, $kost, $materialen) use (&$evenementController) {
             header("Content-Type: application/json");
-
-            $evenement = '
-            {
-                "id": "1",
-                "naam": "Welcome home robbe",
-                "beginDatum": "2017-05-17",
-                "eindDatum": "2017-05-17",
-                "klantNummer": "1",
-                "bezetting": "Persoon z",
-                "kost": "10000",
-                "materialen": "Bier" 
-            }';
-
-            $data = json_decode($evenement);
-
-            $evenementController->handleUpdateEvent($id, $evenement);
+            $evenement = new Evenement($id, $naam, $beginDatum, $eindDatum, $klantNummer, $bezetting, $kost, $materialen);
+            $evenementController->handleUpdateEvent($evenement);
         }
     );
 

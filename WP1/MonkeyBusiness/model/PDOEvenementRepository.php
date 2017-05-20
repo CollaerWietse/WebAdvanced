@@ -135,42 +135,58 @@ class PDOEvenementRepository implements EvenementRepository
     //add an event by giving the new event as parameter
     public function addEvent($event)
     {
-        $data = json_decode($event);
+        //Als een url een spatie ziet, vervangt hij deze met %20. Hier vervangen we de %20 terug met een spatie.
+        $event->setNaam(str_replace('%20', ' ', $event->getNaam()));
+        $event->setBeginDatum(str_replace('%20', ' ', $event->getBeginDatum()));
+        $event->setEindDatum(str_replace('%20', ' ', $event->getEindDatum()));
+        $event->setKlantNummer(str_replace('%20', ' ', $event->getKlantNummer()));
+        $event->setBezetting(str_replace('%20', ' ', $event->getBezetting()));
+        $event->setKost(str_replace('%20', ' ', $event->getKost()));
+        $event->setMaterialen(str_replace('%20', ' ', $event->getMaterialen()));
 
         try {
             $statement = $this->connection->prepare('INSERT INTO Evenementen (naam, begindatum, einddatum, klantnummer, bezetting, kost, materialen) VALUES (?, ?, ?, ?, ?, ?, ?)');
-            $statement->bindParam(1, $data->naam, \PDO::PARAM_STR);
-            $statement->bindParam(2, $data->beginDatum, \PDO::PARAM_STR);
-            $statement->bindParam(3, $data->eindDatum, \PDO::PARAM_STR);
-            $statement->bindParam(4, $data->klantNummer, \PDO::PARAM_INT);
-            $statement->bindParam(5, $data->bezetting, \PDO::PARAM_STR);
-            $statement->bindParam(6, $data->kost, \PDO::PARAM_STR);
-            $statement->bindParam(7, $data->materialen, \PDO::PARAM_STR);
+            $statement->bindParam(1, $event->getNaam(), \PDO::PARAM_STR);
+            $statement->bindParam(2, $event->getBeginDatum(), \PDO::PARAM_STR);
+            $statement->bindParam(3, $event->getEindDatum(), \PDO::PARAM_STR);
+            $statement->bindParam(4, $event->getKlantNummer(), \PDO::PARAM_INT);
+            $statement->bindParam(5, $event->getBezetting(), \PDO::PARAM_STR);
+            $statement->bindParam(6, $event->getKost(), \PDO::PARAM_STR);
+            $statement->bindParam(7, $event->getMaterialen(), \PDO::PARAM_STR);
             $statement->execute();
-            echo 'done!';
+
+            return 'done!';
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
 
     //update an event by giving the id of the event that has to be updated and the event as parameter
-    public function updateEvent($id, $event)
+    public function updateEvent($event)
     {
-
-        $data = json_decode($event);
+        //Als een url een spatie ziet, vervangt hij deze met %20. Hier vervangen we de %20 terug met een spatie.
+        $event->setId(str_replace('%20', ' ', $event->getId()));
+        $event->setNaam(str_replace('%20', ' ', $event->getNaam()));
+        $event->setBeginDatum(str_replace('%20', ' ', $event->getBeginDatum()));
+        $event->setEindDatum(str_replace('%20', ' ', $event->getEindDatum()));
+        $event->setKlantNummer(str_replace('%20', ' ', $event->getKlantNummer()));
+        $event->setBezetting(str_replace('%20', ' ', $event->getBezetting()));
+        $event->setKost(str_replace('%20', ' ', $event->getKost()));
+        $event->setMaterialen(str_replace('%20', ' ', $event->getMaterialen()));
 
         try {
             $statement = $this->connection->prepare('UPDATE Evenementen SET naam = ?, begindatum = ?, einddatum = ?, klantnummer = ?, bezetting = ?, kost = ?, materialen = ? WHERE id = ?');
-            $statement->bindParam(1, $data->naam, \PDO::PARAM_STR);
-            $statement->bindParam(2, $data->beginDatum, \PDO::PARAM_STR);
-            $statement->bindParam(3, $data->eindDatum, \PDO::PARAM_STR);
-            $statement->bindParam(4, $data->klantNummer, \PDO::PARAM_INT);
-            $statement->bindParam(5, $data->bezetting, \PDO::PARAM_STR);
-            $statement->bindParam(6, $data->kost, \PDO::PARAM_STR);
-            $statement->bindParam(7, $data->materialen, \PDO::PARAM_STR);
-            $statement->bindParam(8, $id, \PDO::PARAM_INT);
+            $statement->bindParam(1, $event->getNaam(), \PDO::PARAM_STR);
+            $statement->bindParam(2, $event->getBeginDatum(), \PDO::PARAM_STR);
+            $statement->bindParam(3, $event->getEindDatum(), \PDO::PARAM_STR);
+            $statement->bindParam(4, $event->getKlantNummer(), \PDO::PARAM_INT);
+            $statement->bindParam(5, $event->getBezetting(), \PDO::PARAM_STR);
+            $statement->bindParam(6, $event->getKost(), \PDO::PARAM_STR);
+            $statement->bindParam(7, $event->getMaterialen(), \PDO::PARAM_STR);
+            $statement->bindParam(8, $event->getId(), \PDO::PARAM_INT);
             $statement->execute();
-            echo 'done!';
+
+            return 'done!';
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
