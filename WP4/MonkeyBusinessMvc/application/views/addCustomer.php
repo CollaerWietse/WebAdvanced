@@ -1,33 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Wiets
- * Date: 15/05/2017
- * Time: 17:58
- */
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welkom</title>
-    <link rel="stylesheet" href="<?php echo asset_url()?>Style/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo asset_url() ?>Style/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<?php echo asset_url();?>Script/bootstrap.min.js"></script>
-</head>
-<body>
-<div>
-    <nav class="navbar navbar-inverse" role="navigation">
-        <button class="btn btn-primary navbar-right btnSize" onclick="">Uitloggen</button>
-        <div class="collapse navbar-collapse">
-            <div class="form-group">
-                <a class="navbar-brand fixSize" href="https://webadvanced.vjho.be/Main/home">
-                    <img alt="Monkey Business" src="<?php echo asset_url();?>logo/logo_monkey.jpg" class="image">
-                </a>
-            </div>
-        </div>
-    </nav>
-</div>
 <div class="container">
     <h1>Klant toevoegen</h1>
 

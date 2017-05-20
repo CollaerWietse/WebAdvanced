@@ -21,11 +21,10 @@ class Event_model extends CI_Model
 
     public function addEvent($title, $customer_id, $date)
     {
-        date_default_timezone_set('Europe/Brussels');
         $dataToInsert = array(
             'title' => $title,
             'customer_id' => $customer_id,
-            'date' => DateTime::createFromFormat("d/m/Y G:i", $date)->getTimestamp(),
+            'date' => $date,
         );
 
         $this->db->insert('events', $dataToInsert);

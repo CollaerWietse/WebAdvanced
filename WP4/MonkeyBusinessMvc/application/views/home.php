@@ -1,36 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Wiets
- * Date: 14/05/2017
- * Time: 14:42
- */
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welkom</title>
-    <link rel="stylesheet" href="<?php echo asset_url() ?>Style/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo asset_url() ?>Style/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<?php echo asset_url(); ?>Script/bootstrap.min.js"></script>
-</head>
-<body>
-
-    <div>
-        <nav class="navbar navbar-inverse" role="navigation">
-            <button class="btn btn-primary navbar-right btnSize" onclick="">Uitloggen</button>
-            <div class="collapse navbar-collapse">
-                <div class="form-group">
-                    <a class="navbar-brand fixSize" href="https://webadvanced.vjho.be/Main/home">
-                        <img alt="Monkey Business" src="<?php echo asset_url();?>logo/logo_monkey.jpg" class="image">
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </div>
-
 <div class="container">
     <div>
         <h1>Klanten</h1>
@@ -52,7 +19,7 @@
                     <td><?php echo $customer->phone; ?></td>
                     <td><?php echo $customer->address; ?></td>
                     <td><?php echo $customer->city; ?></td>
-                    <td><a href="<?php echo base_url(); ?>Data/removeCustomer/<?php echo $customer->id; ?>"><span
+                    <td><a href="<?php echo base_url(); ?>Main/removeCustomer/<?php echo $customer->id; ?>"><span
                                     class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                 </tr>
                 <?php
@@ -78,7 +45,7 @@
                 <tr>
                     <td><?php echo $event->title;?></td>
                     <td><?php echo $customers[array_search($event->customer_id, $customers)]->name;?></td>
-                    <td><?php echo date_create($event->date)->format("d/m/Y G:i");?></td>
+                    <td><?php echo date("d/m/Y H:i", $event->date);?></td>
                 </tr>
             <?php
             }
