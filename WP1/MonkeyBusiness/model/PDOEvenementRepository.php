@@ -200,7 +200,7 @@ class PDOEvenementRepository implements EvenementRepository
             $statement = $this->connection->prepare('DELETE FROM Evenementen WHERE id = ?');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
-            echo 'done!';
+            return 'done!';
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

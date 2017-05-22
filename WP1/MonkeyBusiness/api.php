@@ -77,7 +77,7 @@ try {
             $evenementController->handleUpdateEvent($evenement);
         }
     );
-
+    //vb: http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/delete/18
     $router->map('DELETE','/evenement/delete/[i:id]',
         function($id) use (&$evenementController) {
             header("Content-Type: application/json");
