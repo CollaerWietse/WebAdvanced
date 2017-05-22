@@ -2,16 +2,9 @@
 header('Content-disposition: attachment; filename=MonkeyBusinessDB.json');
 header('Content-type: application/json');
 
-$user = 'root';
-$password = 'user';
-$database = 'MonkeyBusiness';
-$hostname = '127.0.0.1';
-$pdo = null;
+require('Include/config.php');
 
 try {
-    $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
     $response['Evenementen'] = ConvertTableToArray($pdo,"Evenementen");
     $response['Klanten'] = ConvertTableToArray($pdo,"Klanten");
 

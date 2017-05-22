@@ -1,8 +1,11 @@
 <?php
 require_once "vendor/autoload.php";
 use \model\PDOEvenementRepository;
+use \model\PDOKlantRepository;
 use \view\EvenementJsonView;
+use \view\KlantJsonView;
 use \controller\EvenementController;
+use \controller\KlantController;
 use \model\Evenement;
 
 $user = 'root';
@@ -10,15 +13,16 @@ $password = 'user';
 $database = 'MonkeyBusiness';
 $hostname = '127.0.0.1';
 $pdo = null;
+
 try {
-    $pdo = new PDO("mysql:host=$hostname;dbname=$database",
-        $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE,
-        PDO::ERRMODE_EXCEPTION);
+    $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     $evenementPDORepository = new PDOEvenementRepository($pdo);
     $evenementJsonView = new EvenementJsonView();
-    $evenementController = new EvenementController(
-        $evenementPDORepository, $evenementJsonView);
+    $evenementController = new EvenementController($evenementPDORepository, $evenementJsonView);
+    $klantPDORepository = new PDOKlantRepository($pdo);
+    $klantJsonView = new KlantJsonView();
+    $klantController = new KlantController($klantPDORepository, $klantJsonView);
 
     $router = new AltoRouter();
 
@@ -66,6 +70,14 @@ try {
             header("Content-Type: application/json");
             $evenement = new Evenement(null, $naam, $beginDatum, $eindDatum, $klantNummer, $bezetting, $kost, $materialen);
             $evenementController->handleAddEvent($evenement);
+        }
+    );
+
+    $router->map('POST','/klant/add/[:naam]/[:voornaam]/[:postcode]/[:gemeente]/[:straat]/[:huisnummer]/[:telefoonnummer]/[:mail]',
+        function($naam, $voornaam, $postcode, $gemeente, $straat, $huisnummer, $telefoonnummer, $mail) use (&$klantController) {
+            header("Content-Type: application/json");
+            $klant = new Evenement(null, $naam, $voornaam, $postcode, $gemeente, $straat, $huisnummer, $telefoonnummer, $mail);
+            $klantController->handleAddCustomer($klant);
         }
     );
 
