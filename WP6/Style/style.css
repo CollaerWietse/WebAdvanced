@@ -1,0 +1,21 @@
+.topMargin{
+    margin-top: 10%;
+}
+.image{
+    height: 50px;
+}
+.fixSize{
+    height: 60px;
+}
+.navbar-brand{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-right{
+    margin-right: 0;
+}
+
+.navbar {
+    border-radius: 0;
+}

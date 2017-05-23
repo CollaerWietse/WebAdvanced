@@ -21,4 +21,9 @@ class KlantController
         $klant = $this->klantRepository->findCustomerById($id);
         $this->view->show(['klant' => $klant]);
     }
+
+    public function handleAddCustomer($customer) {
+        $customer = $this->klantRepository->addCustomer($customer);
+        echo json_encode($customer, JSON_PRETTY_PRINT);
+    }
 }
