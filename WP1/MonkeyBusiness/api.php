@@ -1,11 +1,8 @@
 <?php
 require_once "vendor/autoload.php";
 use \model\PDOEvenementRepository;
-use \model\PDOKlantRepository;
 use \view\EvenementJsonView;
-use \view\KlantJsonView;
 use \controller\EvenementController;
-use \controller\KlantController;
 use \model\Evenement;
 
 $user = 'root';
@@ -20,15 +17,13 @@ try {
     $evenementPDORepository = new PDOEvenementRepository($pdo);
     $evenementJsonView = new EvenementJsonView();
     $evenementController = new EvenementController($evenementPDORepository, $evenementJsonView);
-    $klantPDORepository = new PDOKlantRepository($pdo);
-    $klantJsonView = new KlantJsonView();
-    $klantController = new KlantController($klantPDORepository, $klantJsonView);
 
     $router = new AltoRouter();
 
     $router->setBasePath('/ProjectWebAdvanced/WP1/MonkeyBusiness');
     //$router->setBasePath('/~user/ProjectWebAdvanced/WP1/MonkeyBusiness');
 
+    //http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/16
     $router->map('GET','/evenement/[i:id]',
         function($id) use (&$evenementController) {
             header("Content-Type: application/json");
@@ -36,6 +31,7 @@ try {
         }
     );
 
+    //http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement
     $router->map('GET','/evenement',
         function() use (&$evenementController) {
             header("Content-Type: application/json");
@@ -43,6 +39,7 @@ try {
         }
     );
 
+    //http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/klant/1
     $router->map('GET','/evenement/klant/[i:id]',
         function($id) use (&$evenementController) {
             header("Content-Type: application/json");
@@ -50,6 +47,7 @@ try {
         }
     );
 
+    //http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/from/2017-06-01/until/2017-06-03
     $router->map('GET','/evenement/from/[:from]/until/[:until]',
         function($from, $until) use (&$evenementController) {
             header("Content-Type: application/json");
@@ -57,6 +55,7 @@ try {
         }
     );
 
+    //http://192.168.46.137/ProjectWebAdvanced/WP1/MonkeyBusiness/evenement/klant/2/from/2017-06-25/until/2017-06-27
     $router->map('GET','/evenement/klant/[i:id]/from/[:from]/until/[:until]',
         function($id, $from, $until) use (&$evenementController) {
             header("Content-Type: application/json");
@@ -70,14 +69,6 @@ try {
             header("Content-Type: application/json");
             $evenement = new Evenement(null, $naam, $beginDatum, $eindDatum, $klantNummer, $bezetting, $kost, $materialen);
             $evenementController->handleAddEvent($evenement);
-        }
-    );
-
-    $router->map('POST','/klant/add/[:naam]/[:voornaam]/[:postcode]/[:gemeente]/[:straat]/[:huisnummer]/[:telefoonnummer]/[:mail]',
-        function($naam, $voornaam, $postcode, $gemeente, $straat, $huisnummer, $telefoonnummer, $mail) use (&$klantController) {
-            header("Content-Type: application/json");
-            $klant = new Evenement(null, $naam, $voornaam, $postcode, $gemeente, $straat, $huisnummer, $telefoonnummer, $mail);
-            $klantController->handleAddCustomer($klant);
         }
     );
 

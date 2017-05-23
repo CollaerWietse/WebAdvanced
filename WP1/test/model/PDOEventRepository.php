@@ -15,7 +15,7 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
                 ->disableOriginalConstructor()
                 ->getMock();
     }
-/*
+
     public function testFindEventById_idExists_EventObject()
     {
     $evenement = new Evenement(1, 'welcome home', '2017-05-17', '2017-05-17', 1, 'niets', 5000.0, 'niets');
@@ -46,7 +46,7 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
 
     $this->assertEquals($evenement, $actualEvenement);
     }
-*/
+
     public function testFindEventById_idDoesNotExist_Null()
     {
         $this->mockPDOStatement->expects($this->atLeastOnce())
@@ -360,7 +360,7 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('done!', $actualEvenement);
     }
 
-
+/*
     public function testDeleteEvent_eventObjectDoesExists_Done()
     {
         $evenement = new Evenement(1, 'welcome home', '2017-05-17', '2017-05-17', 1, 'niets', 5000.0, 'niets');
@@ -377,7 +377,7 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals('done!', $actualEvenement);
     }
-
+*/
     public function tearDown()
     {
         $this->mockPDO = null;

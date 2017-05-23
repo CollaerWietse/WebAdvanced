@@ -108,8 +108,9 @@ class PDOEvenementRepository implements EvenementRepository
 
     public function findEventByCustomerAndDate($customerId, $startDate, $endDate)
     {
+
         try {
-            $statement = $this->connection->prepare('SELECT * FROM Evenementen WHERE begindatum = ? AND einddatum = ? AND id = ?');
+            $statement = $this->connection->prepare('SELECT * FROM Evenementen WHERE begindatum = ? AND einddatum = ? AND klantnummer = ?');
             $statement->bindParam(1, $startDate, \PDO::PARAM_STR);
             $statement->bindParam(2, $endDate, \PDO::PARAM_STR);
             $statement->bindParam(3, $customerId, \PDO::PARAM_INT);
@@ -117,6 +118,8 @@ class PDOEvenementRepository implements EvenementRepository
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             $arrayResults = array();
+
+
 
             if (count($results) > 0) {
                 foreach ($results as $event) {
