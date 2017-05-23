@@ -50,7 +50,7 @@ class Main extends CI_Controller
                 redirect(base_url() . "Main/home");
             }
             else{
-                $error['validation'] = "Gebruikersnaam of wachtwoord niet correct";
+                $error['validation'] = "<p>Gebruikersnaam of wachtwoord niet correct</p>";
                 $this->load->view('login', $error);
             }
 
@@ -79,7 +79,6 @@ class Main extends CI_Controller
             $this->load->model('event_model');
             $data["customers"] = $this->customer_model->getAllCustomers();
             $data["events"] = $this->event_model->getAllEvents();
-            date_default_timezone_set('Europe/Brussels');
             $this->load->view('header');
             $this->load->view('home', $data);
         }

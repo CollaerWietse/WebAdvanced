@@ -23,20 +23,22 @@
     //Wanneer de pagina geladen is, kan de data van de server gehaald worden en deze in de DOM gezet worden.
     window.onload = function () {
         var insertElement = document.getElementById("events");
-        fetch(baseUrl + "MonkeyBusiness/evenement", {method: 'GET'}).then(function (response) {
-            return response.json();
-        }).then(function (eventsArray) {
-            for (var element in eventsArray) {
-                //De html wordt altijd toegevoegd aan hetgeen al in insertElement aanwezig is.
-                insertElement.innerHTML = insertElement.innerHTML + "<div class='event'><h5>" + eventsArray[element].naam + "</h5><p>Begindatum: " + eventsArray[element].beginDatum +
-                    "</p><p>Einddatum: " + eventsArray[element].eindDatum +
-                    "</p><p>Klantnummer: " + eventsArray[element].klantnummer +
-                    "</p><p>Bezetting: " + eventsArray[element].bezetting +
-                    "</p><p>Kost: " + eventsArray[element].kost +
-                    "</p><p>Materialen: " + eventsArray[element].materialen +
-                    "</p><button class='button' onclick='remove(" + eventsArray[element].id + ")'>Verwijder</button></div>"
-            }
-        });
+        fetch(baseUrl + "MonkeyBusiness/evenement", {method: 'GET'})
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (eventsArray) {
+                for (var index in eventsArray) {
+                    //De html wordt altijd toegevoegd aan hetgeen al in insertElement aanwezig is.
+                    insertElement.innerHTML = insertElement.innerHTML + "<div class='event'><h5>" + eventsArray[index].naam + "</h5><p>Begindatum: " + eventsArray[index].beginDatum +
+                        "</p><p>Einddatum: " + eventsArray[index].eindDatum +
+                        "</p><p>Klantnummer: " + eventsArray[index].klantnummer +
+                        "</p><p>Bezetting: " + eventsArray[index].bezetting +
+                        "</p><p>Kost: " + eventsArray[index].kost +
+                        "</p><p>Materialen: " + eventsArray[index].materialen +
+                        "</p><button class='button' onclick='remove(" + eventsArray[index].id + ")'>Verwijder</button></div>"
+                }
+            });
     };
 
     //Verwijderen van een record in de db dmv een id.
@@ -47,35 +49,13 @@
             },
             method: 'DELETE'
         }).then(function (response) {
-            alert('Verwijdert');
+            alert('Verwijderd');
             location.reload();
         }).catch(function (error) {
             alert('Er liep iets mis!');
         });
     }
 
-    /*document.getElementById("delete").onclick = function (action) {
-        action.preventDefault();
-        /!*        var event = {};
-         event.title = document.getElementById("title").value;
-         event.startDate = document.getElementById("startDate").value;
-         event.endDate = document.getElementById("endDate").value;
-         event.client = document.getElementById("client").value;
-         event.cast = document.getElementById("cast").value;
-         event.cost = document.getElementById("cost").value;
-         event.materials = document.getElementById("materials").value;*!/
-
-        fetch(baseUrl + "MonkeyBusiness/evenement/delete/", {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'DELETE'
-        }).then(function (response) {
-            alert('Verwijdert');
-        }).catch(function (error) {
-            alert('Er liep iets mis :o');
-        });
-    };*/
 </script>
 
 </body>

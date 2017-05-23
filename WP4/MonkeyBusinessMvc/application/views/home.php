@@ -45,7 +45,7 @@
                 <tr>
                     <td><?php echo $event->title;?></td>
                     <td><?php echo $customers[array_search($event->customer_id, $customers)]->name;?></td>
-                    <td><?php echo date("d/m/Y H:i", $event->date);?></td>
+                    <td><?php echo $event->date;?></td>
                 </tr>
             <?php
             }

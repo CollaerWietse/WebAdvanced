@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3a1a65bf-9790-4bf1-be07-308583459e97" name="UbuntuServer" url="http://192.168.25.128">
+        <fileTransfer host="192.168.25.128" port="22" rootFolder="/home/user/public_html/ProjectWebAdvanced/WP2" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
