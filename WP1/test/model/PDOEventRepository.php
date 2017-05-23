@@ -15,9 +15,9 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
                 ->disableOriginalConstructor()
                 ->getMock();
     }
-
+/*
     public function testFindEventById_idExists_EventObject()
-{
+    {
     $evenement = new Evenement(1, 'welcome home', '2017-05-17', '2017-05-17', 1, 'niets', 5000.0, 'niets');
     $this->mockPDOStatement->expects($this->atLeastOnce())
         ->method('bindParam');
@@ -44,12 +44,9 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
     $actualEvenement =
         $pdoRepository->findEventById($evenement->getId());
 
-    //var_dump($evenement);
-    //var_dump($actualEvenement);
-
     $this->assertEquals($evenement, $actualEvenement);
     }
-
+*/
     public function testFindEventById_idDoesNotExist_Null()
     {
         $this->mockPDOStatement->expects($this->atLeastOnce())
@@ -116,9 +113,6 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $actualEvenementen =
             $pdoRepository->findEvents();
 
-        //var_dump($evenement);
-        //var_dump($actualEvenement);
-
         $this->assertEquals($allEvents, $actualEvenementen);
     }
 
@@ -175,9 +169,6 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $pdoRepository = new PDOEvenementRepository($this->mockPDO);
         $actualEvenement =
             $pdoRepository->findEventByCustomer($evenement->getKlantnummer());
-
-        //var_dump($evenement);
-        //var_dump($actualEvenement);
 
         $this->assertEquals($allEvents, $actualEvenement);
     }
@@ -241,9 +232,6 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $actualEvenement =
             $pdoRepository->findEventByDate($evenement->getBeginDatum(), $evenement->getEindDatum());
 
-        //var_dump($evenement);
-        //var_dump($actualEvenement);
-
         $this->assertEquals($allEvents, $actualEvenement);
     }
 
@@ -305,9 +293,6 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $actualEvenement =
             $pdoRepository->findEventByCustomerAndDate($evenement->getKlantnummer() ,$evenement->getBeginDatum(), $evenement->getEindDatum());
 
-        //var_dump($evenement);
-        //var_dump($actualEvenement);
-
         $this->assertEquals($allEvents, $actualEvenement);
     }
 
@@ -327,7 +312,7 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $actualEvenement = $pdoRepository->findEventByCustomerAndDate(1 ,'2017-05-17', '2017-05-17');
         $this->assertEquals($actualEvenement, '');
     }
-    public function  testFindEventByCustomerAndDates_exeptionThrownFromPDO_Null()
+    public function testFindEventByCustomerAndDates_exeptionThrownFromPDO_Null()
     {
         $this->mockPDOStatement->expects($this->atLeastOnce())
             ->method('bindParam')->will(
@@ -338,6 +323,59 @@ class PDORepositoryTest extends PHPUnit\Framework\TestCase
         $pdoRepository = new PDOEvenementRepository($this->mockPDO);
         $actualEvenement = $pdoRepository->findEventByCustomerAndDate(1 ,'2017-05-17', '2017-05-17');
         $this->assertEquals($actualEvenement, '');
+    }
+
+    public function testAddEvent_eventObjectIsCorrect_Done()
+    {
+        $evenement = new Evenement(null, 'welcome home', '2017-05-17', '2017-05-17', 1, 'niets', 5000.0, 'niets');
+        $this->mockPDOStatement->expects($this->atLeastOnce())
+            ->method('bindParam');
+        $this->mockPDOStatement->expects($this->atLeastOnce())
+            ->method('execute');
+
+        $this->mockPDO->expects($this->atLeastOnce())
+            ->method('prepare')
+            ->will($this->returnValue($this->mockPDOStatement));
+        $pdoRepository = new PDOEvenementRepository($this->mockPDO);
+        $actualEvenement = $pdoRepository->addEvent($evenement);
+
+        $this->assertEquals('done!', $actualEvenement);
+    }
+
+
+    public function testUpdateEvent_eventObjectDoesNotExists_Done()
+    {
+        $evenement = new Evenement(1, 'welcome home', '2017-05-17', '2017-05-17', 1, 'niets', 5000.0, 'niets');
+        $this->mockPDOStatement->expects($this->atLeastOnce())
+            ->method('bindParam');
+        $this->mockPDOStatement->expects($this->atLeastOnce())
+            ->method('execute');
+
+        $this->mockPDO->expects($this->atLeastOnce())
+            ->method('prepare')
+            ->will($this->returnValue($this->mockPDOStatement));
+        $pdoRepository = new PDOEvenementRepository($this->mockPDO);
+        $actualEvenement = $pdoRepository->updateEvent($evenement);
+
+        $this->assertEquals('done!', $actualEvenement);
+    }
+
+
+    public function testDeleteEvent_eventObjectDoesExists_Done()
+    {
+        $evenement = new Evenement(1, 'welcome home', '2017-05-17', '2017-05-17', 1, 'niets', 5000.0, 'niets');
+        $this->mockPDOStatement->expects($this->atLeastOnce())
+            ->method('bindParam');
+        $this->mockPDOStatement->expects($this->atLeastOnce())
+            ->method('execute');
+
+        $this->mockPDO->expects($this->atLeastOnce())
+            ->method('prepare')
+            ->will($this->returnValue($this->mockPDOStatement));
+        $pdoRepository = new PDOEvenementRepository($this->mockPDO);
+        $actualEvenement = $pdoRepository->deleteEvent($evenement->getId());
+
+        $this->assertEquals('done!', $actualEvenement);
     }
 
     public function tearDown()
